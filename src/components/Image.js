@@ -4,7 +4,7 @@ import { Context } from "../context/context"
 export default function Image ({className, img}) {
     
     const [hovered, setHovered] = useState(false)
-    const { toggleFavorite } = useContext(Context)
+    const { toggleFavorite, addPhotoToCart } = useContext(Context)
 
     return (
         <div 
@@ -19,7 +19,10 @@ export default function Image ({className, img}) {
                     className="ri-heart-line favorite"
                 >
                 </i>
-                <i className="ri-add-circle-line cart"></i>
+                <i 
+                    onClick={ () => addPhotoToCart(img) }
+                    className="ri-add-circle-line cart"
+                ></i>
                 </>
             }
 
