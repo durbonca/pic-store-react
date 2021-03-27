@@ -1,10 +1,12 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { Context } from "../context/context"
 
-export default function Image ({className, src}) {
+export default function Image ({className, img}) {
     
     const [hovered, setHovered] = useState(false)
+    const { toggleFavorite } = useContext(Context)
 
-    return(
+    return (
         <div 
             onMouseOver={()=>setHovered(true)} 
             onMouseLeave={()=>setHovered(false)} 
@@ -12,11 +14,22 @@ export default function Image ({className, src}) {
         >
             {hovered && 
                 <>
-                <i className="ri-heart-line favorite"></i>
+                <i 
+                    onClick={()=>toggleFavorite(img.id)} 
+                    className="ri-heart-line favorite"
+                >
+                </i>
                 <i className="ri-add-circle-line cart"></i>
                 </>
             }
-            <img src={src} alt="img" className="image-grid"/>
+
+            {img.isFavorite &&
+               <i onClick={()=>toggleFavorite(img.id)} 
+                 className="ri-heart-fill favorite"
+                >
+                </i> }
+
+            <img src={img.url} alt="img" className="image-grid"/>
         </div>
     )
 }
