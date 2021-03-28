@@ -28,10 +28,8 @@ function ContextProvider (props) {
         setAllPhotos(updatedArr) 
     } 
 
-    console.log(cartItems)
-
     return (
-        <Context.Provider value={{allPhotos, toggleFavorite, addPhotoToCart}}>
+        <Context.Provider value={{allPhotos, cartItems, toggleFavorite, addPhotoToCart}}>
             {props.children}
         </Context.Provider>
     )
