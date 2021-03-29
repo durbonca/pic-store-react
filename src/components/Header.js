@@ -8,7 +8,7 @@ export default function Header() {
     const {cartItems} = useContext(Context)  
 
     function cartButton(){
-        if(Object.keys(cartItems).length){
+        if (cartItems.length) {
             return <Link to="/cart"><i className="ri-shopping-cart-fill ri-fw ri-2x"></i></Link>
         }
         else{
