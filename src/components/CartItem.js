@@ -1,7 +1,7 @@
 import {useContext} from "react"
 import {Context} from "../context/context"
 
-export default function CartItem ({img}){
+export default function CartItem ({img, price}){
 
     const {removePhotoFromCart} = useContext(Context) 
 
@@ -9,7 +9,7 @@ export default function CartItem ({img}){
         <div className="cart-item">
             <i className="ri-delete-bin-line" onClick={() => removePhotoFromCart(img.id)}></i>
             <img src={img.url} width="130px" alt="img"/>
-            <p>$5.99</p>
+            <p>{price.toLocaleString("en-US", {style: "currency", currency: "USD" } ) }</p>
         </div>
     )
 }
