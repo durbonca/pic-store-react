@@ -17,13 +17,8 @@ function ContextProvider (props) {
         setCartItems( cart => [ ...cart, newImgToCart] )
     }
 
-    function removePhotoFromCart (itemToRemove){
-        const newArr = [...cartItems]
-        var index = newArr.indexOf(itemToRemove)
-        if (index !== -1) {
-            newArr.splice(index, 1)    
-            setCartItems ( newArr )
-          }
+    function removePhotoFromCart (id){
+        setCartItems(prevItems => prevItems.filter(item => item.id !== id))
     }
 
     function toggleFavorite(id){

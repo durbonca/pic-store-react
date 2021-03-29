@@ -17,7 +17,7 @@ export default function Image ({className, img}) {
     
     function cartIcon(){
         if(cartItems.some(cartItem => cartItem.id === img.id)) { 
-            return <i onClick={ () => removePhotoFromCart(img) } className="ri-shopping-cart-fill cart"></i>
+            return <i onClick={ () => removePhotoFromCart(img.id) } className="ri-shopping-cart-fill cart"></i>
         }
         else if(hovered){
             return <i onClick={ () => addPhotoToCart(img) } className="ri-add-circle-line cart"></i> 
