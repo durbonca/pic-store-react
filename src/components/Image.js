@@ -5,35 +5,22 @@ export default function Image ({className, img}) {
     
     const [hovered, setHovered] = useState(false)
     const { cartItems } = useContext(Context)
-    const { toggleFavorite, addPhotoToCart } = useContext(Context)
-
-    function checkCart () {
-        if(cartItems.some(cartItem => cartItem.id === img.id)){
-            return true
-        }else{
-            return false
-        }
-    }
+    const { toggleFavorite, addPhotoToCart, removePhotoFromCart } = useContext(Context)
 
     function heartIcon(){
-        if (!img.isFavorite){
+        if (img.isFavorite){
+            return <i onClick={()=>toggleFavorite(img.id)} className="ri-heart-fill favorite"></i> 
+        } else if(hovered) {
             return <i onClick={()=>toggleFavorite(img.id)} className="ri-heart-line favorite"></i>
-        }
-    }
-
-    function heartIconFav(){
-        if(img.isFavorite){
-            return <i onClick={()=>toggleFavorite(img.id)} className="ri-heart-fill favorite"
-           >
-           </i> 
         }
     }
     
     function cartIcon(){
-        if(checkCart()) { 
-            return <i className="ri-shopping-cart-fill cart"></i>
-        }else{
-            return <i onClick={ () => addPhotoToCart(img) }className="ri-add-circle-line cart"></i> 
+        if(cartItems.some(cartItem => cartItem.id === img.id)) { 
+            return <i onClick={ () => removePhotoFromCart(img) } className="ri-shopping-cart-fill cart"></i>
+        }
+        else if(hovered){
+            return <i onClick={ () => addPhotoToCart(img) } className="ri-add-circle-line cart"></i> 
         }
     }
 
@@ -43,14 +30,8 @@ export default function Image ({className, img}) {
             onMouseLeave={()=>setHovered(false)} 
             className={`${className} image-container`}
         >
-            {hovered && 
-                <>
-                {heartIcon()}
-                {cartIcon()}
-                </>
-            }
-            {heartIconFav()}
-            
+            {heartIcon()}
+            {cartIcon()}   
             <img src={img.url} alt="img" className="image-grid"/>
         </div>
     )
